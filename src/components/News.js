@@ -13,7 +13,7 @@ const News = (props) => {
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    
+
     const updateNews = async () => {
         props.setProgress(10)
         const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}
@@ -28,17 +28,17 @@ const News = (props) => {
         setLoading(false)
         props.setProgress(100)
     }
-    
+
     useEffect(() => {
         document.title = `${capitalizeFirstLetter(props.category)}- NewsMonkey`
         updateNews()
         //eslint-disable-next-line
-    },[])
+    }, [])
 
 
     const fetchMoreData = async () => {
         const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}
-        &page=${page+1}&pageSize=${props.pageSize}`
+        &page=${page + 1}&pageSize=${props.pageSize}`
         setPage(page + 1)
         let data = await fetch(url)
         let parsedData = await data.json()
